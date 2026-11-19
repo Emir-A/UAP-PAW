@@ -26,7 +26,7 @@ class AuthController extends Controller
             ],
             'email' => ['required', 'email', 'max:254', 'unique:users,email'],
             'program_studi' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'string', 'min:8', 'max:128', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'max:128'],
         ]);
 
         User::create($data);

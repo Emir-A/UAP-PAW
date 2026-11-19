@@ -1,54 +1,73 @@
 @extends('layout')
 
 @section('title', 'Masuk')
-@section('heading', 'Masuk')
 
-@section('description')
-Gunakan email atau NIM yang sudah terdaftar.
-@endsection
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+@endpush
 
 @section('content')
-<section class="panel">
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<section class="auth-layout" aria-labelledby="login-title">
+    <div class="auth-card">
+        <h1 id="login-title">Masuk</h1>
 
-        <div class="form-field">
-            <label for="identity">Email atau NIM</label>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-            <input
-                id="identity"
-                name="identity"
-                type="text"
-                value="{{ old('identity') }}"
-                autocomplete="username"
-                maxlength="254"
-                required
+            <div class="form-field">
+                <label for="identity">Email atau NIM</label>
+
+                <input
+                    id="identity"
+                    name="identity"
+                    type="text"
+                    value="{{ old('identity') }}"
+                    autocomplete="username"
+                    maxlength="254"
+                    required
+                    @error('identity')
+                    aria-invalid="true"
+                    aria-describedby="identity-error"
+                    @enderror>
+
                 @error('identity')
-                aria-invalid="true"
-                aria-describedby="identity-error"
-                @enderror>
+                <p id="identity-error" class="field-error">
+                    {{ $message }}
+                </p>
+                @enderror
+            </div>
 
-            @error('identity')
-            <p id="identity-error" class="field-error">
-                {{ $message }}
-            </p>
-            @enderror
-        </div>
+            <div class="form-field">
+                <label for="password">Kata sandi</label>
 
-        <div class="form-field">
-            <label for="password">Kata sandi</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    maxlength="128"
+                    required
+                    @error('password')
+                    aria-invalid="true"
+                    aria-describedby="password-error"
+                    @enderror>
 
-            <input
-                id="password"
-                name="password"
-                type="password"
-                autocomplete="current-password"
-                maxlength="128"
-                required>
-        </div>
+                @error('password')
+                <p id="password-error" class="field-error">
+                    {{ $message }}
+                </p>
+                @enderror
+            </div>
 
-        <button type="submit" class="button">Masuk</button>
-    </form>
+            <button type="submit" class="button auth-submit">
+                Masuk
+            </button>
+        </form>
 
+        <p class="auth-switch">
+            Belum punya akun?
+            <a href="{{ route('register') }}">Daftar sekarang</a>
+        </p>
+    </div>
 </section>
 @endsection

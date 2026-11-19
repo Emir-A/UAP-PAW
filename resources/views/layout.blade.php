@@ -8,6 +8,7 @@
     <title>@yield('title', 'Beranda') | Room Availability Checker</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @stack('styles')
 </head>
 
 <body>
@@ -33,12 +34,9 @@
 
                 @guest
                 <a href="{{ route('login') }}">Masuk</a>
-                <a href="{{ route('register') }}">Daftar</a>
                 @endguest
 
                 @auth
-                <span>{{ auth()->user()->name }}</span>
-
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
@@ -51,7 +49,9 @@
         </div>
     </header>
 
-    <main id="main-content" class="container main-content" tabindex="-1">
+
+    <main id="main-content" class="container main-content {{ request()->routeIs('login', 'register') ? 'auth-page' : '' }}" tabindex="-1">
+
         @if(session('status'))
         <div class="alert alert-success" role="status">
             {{ session('status') }}
@@ -70,6 +70,7 @@
         </div>
         @endif
 
+        @unless(request()->routeIs('login', 'register'))
         <header class="page-heading">
             <h1>@yield('heading', 'Beranda')</h1>
 
@@ -77,8 +78,10 @@
             <p>@yield('description')</p>
             @endif
         </header>
+        @endunless
 
         @yield('content')
+
     </main>
 </body>
 
