@@ -37,6 +37,7 @@
                 @endguest
 
                 @auth
+                <a href="{{ route('timetable.index') }}">Jadwal pribadi</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
