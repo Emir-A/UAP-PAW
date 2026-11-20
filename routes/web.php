@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TimetableController;
 
 Route::view('/', 'home')->name('home');
 
@@ -19,3 +20,23 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/timetable', [TimetableController::class, 'index'])
+        ->name('timetable.index');
+
+    Route::get('/timetable/create', [TimetableController::class, 'create'])
+        ->name('timetable.create');
+
+    Route::post('/timetable', [TimetableController::class, 'store'])
+        ->name('timetable.store');
+
+    Route::get('/timetable/{id}/edit', [TimetableController::class, 'edit'])
+        ->name('timetable.edit');
+
+    Route::put('/timetable/{id}', [TimetableController::class, 'update'])
+        ->name('timetable.update');
+
+    Route::delete('/timetable/{id}', [TimetableController::class, 'destroy'])
+        ->name('timetable.destroy');
+});
