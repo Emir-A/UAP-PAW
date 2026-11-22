@@ -4,7 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\LostItemController;
 use App\Http\Controllers\TimetableController;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Route;
+=======
+use App\Http\Controllers\RoomReportController;
+>>>>>>> origin/main
 
 Route::get('/', [CatalogController::class, 'index'])->name('home');
 Route::get('/classes', [CatalogController::class, 'index'])->name('classes');
@@ -45,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/timetable/{id}', [TimetableController::class, 'destroy'])
         ->name('timetable.destroy');
 
+<<<<<<< HEAD
     Route::get('/lost-items/create', [LostItemController::class, 'create'])
         ->name('lost-items.create');
 
@@ -63,3 +68,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/lost-items/{id}', [LostItemController::class, 'destroy'])
         ->name('lost-items.destroy');
 });
+=======
+    Route::get('/reports', [RoomReportController::class, 'index'])
+        ->name('reports.index');
+
+    Route::get('/reports/create', [RoomReportController::class, 'create'])
+        ->name('reports.create');
+
+    Route::post('/reports', [RoomReportController::class, 'store'])
+        ->name('reports.store')
+        ->middleware('throttle:10,1');
+
+    Route::get('/reports/{id}', [RoomReportController::class, 'show'])
+        ->whereNumber('id')
+        ->name('reports.show');
+
+    Route::get('/reports/{id}/edit', [RoomReportController::class, 'edit'])
+        ->whereNumber('id')
+        ->name('reports.edit');
+
+    Route::put('/reports/{id}', [RoomReportController::class, 'update'])
+        ->whereNumber('id')
+        ->name('reports.update');
+
+    Route::delete('/reports/{id}', [RoomReportController::class, 'destroy'])
+        ->whereNumber('id')
+        ->name('reports.destroy');
+});
+>>>>>>> origin/main

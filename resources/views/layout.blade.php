@@ -19,7 +19,7 @@
     <header class="site-header">
         <div class="container header-content">
             <a class="brand" href="{{ route('home') }}">
-                Room Availability Checker
+                Backroom
             </a>
 
             <nav aria-label="Navigasi utama">
@@ -55,6 +55,7 @@
                 @endguest
 
                 @auth
+<<<<<<< HEAD
                 <a
                     href="{{ route('timetable.index') }}"
                     @if(request()->routeIs('timetable.*'))
@@ -63,6 +64,10 @@
                     >
                     Jadwal pribadi
                 </a>
+=======
+                <a href="{{ route('timetable.index') }}">Jadwal pribadi</a>
+                <a href="{{ route('reports.index') }}">Laporan</a>
+>>>>>>> origin/main
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
