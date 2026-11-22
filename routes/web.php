@@ -1,10 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\LostItemController;
 use App\Http\Controllers\TimetableController;
+use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', [CatalogController::class, 'index'])->name('home');
+Route::get('/classes', [CatalogController::class, 'index'])->name('classes');
+Route::get('/rooms', [CatalogController::class, 'rooms'])->name('rooms');
+Route::get('/lost-items', [LostItemController::class, 'index'])->name('lost-items.index');
 
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('login');
@@ -39,4 +44,22 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/timetable/{id}', [TimetableController::class, 'destroy'])
         ->name('timetable.destroy');
+
+    Route::get('/lost-items/create', [LostItemController::class, 'create'])
+        ->name('lost-items.create');
+
+    Route::post('/lost-items', [LostItemController::class, 'store'])
+        ->name('lost-items.store');
+
+    Route::get('/lost-items/{id}/edit', [LostItemController::class, 'edit'])
+        ->name('lost-items.edit');
+
+    Route::put('/lost-items/{id}', [LostItemController::class, 'update'])
+        ->name('lost-items.update');
+
+    Route::patch('/lost-items/{id}/found', [LostItemController::class, 'markFound'])
+        ->name('lost-items.found');
+
+    Route::delete('/lost-items/{id}', [LostItemController::class, 'destroy'])
+        ->name('lost-items.destroy');
 });
