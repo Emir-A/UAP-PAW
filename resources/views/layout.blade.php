@@ -38,6 +38,7 @@
 
                 @auth
                 <a href="{{ route('timetable.index') }}">Jadwal pribadi</a>
+                <a href="{{ route('reports.index') }}">Laporan</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 

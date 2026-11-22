@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\RoomReportController;
 
 Route::view('/', 'home')->name('home');
 
@@ -39,4 +40,30 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/timetable/{id}', [TimetableController::class, 'destroy'])
         ->name('timetable.destroy');
+
+    Route::get('/reports', [RoomReportController::class, 'index'])
+        ->name('reports.index');
+
+    Route::get('/reports/create', [RoomReportController::class, 'create'])
+        ->name('reports.create');
+
+    Route::post('/reports', [RoomReportController::class, 'store'])
+        ->name('reports.store')
+        ->middleware('throttle:10,1');
+
+    Route::get('/reports/{id}', [RoomReportController::class, 'show'])
+        ->whereNumber('id')
+        ->name('reports.show');
+
+    Route::get('/reports/{id}/edit', [RoomReportController::class, 'edit'])
+        ->whereNumber('id')
+        ->name('reports.edit');
+
+    Route::put('/reports/{id}', [RoomReportController::class, 'update'])
+        ->whereNumber('id')
+        ->name('reports.update');
+
+    Route::delete('/reports/{id}', [RoomReportController::class, 'destroy'])
+        ->whereNumber('id')
+        ->name('reports.destroy');
 });
