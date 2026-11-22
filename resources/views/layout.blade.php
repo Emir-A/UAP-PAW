@@ -19,7 +19,7 @@
     <header class="site-header">
         <div class="container header-content">
             <a class="brand" href="{{ route('home') }}">
-                Room Availability Checker
+                Backroom
             </a>
 
             <nav aria-label="Navigasi utama">
