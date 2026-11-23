@@ -24,12 +24,30 @@
 
             <nav aria-label="Navigasi utama">
                 <a
-                    href="{{ route('home') }}"
-                    @if(request()->routeIs('home'))
+                    href="{{ route('classes') }}"
+                    @if(request()->routeIs('home', 'classes'))
                     aria-current="page"
                     @endif
                     >
-                    Beranda
+                    Jadwal kelas
+                </a>
+
+                <a
+                    href="{{ route('rooms') }}"
+                    @if(request()->routeIs('rooms'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Ruang
+                </a>
+
+                <a
+                    href="{{ route('lost-items.index') }}"
+                    @if(request()->routeIs('lost-items.*'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Barang hilang
                 </a>
 
                 @guest
@@ -37,8 +55,19 @@
                 @endguest
 
                 @auth
+<<<<<<< HEAD
+                <a
+                    href="{{ route('timetable.index') }}"
+                    @if(request()->routeIs('timetable.*'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Jadwal pribadi
+                </a>
+=======
                 <a href="{{ route('timetable.index') }}">Jadwal pribadi</a>
                 <a href="{{ route('reports.index') }}">Laporan</a>
+>>>>>>> origin/main
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 

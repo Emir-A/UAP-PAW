@@ -1,0 +1,234 @@
+.lost-page .page-heading {
+    display: none;
+}
+
+.main-content:has(.lost-page) > .page-heading {
+    display: none;
+}
+
+.main-content {
+    width: min(1300px, 100%);
+    padding: clamp(20px, 3vw, 44px) clamp(16px, 4vw, 64px) 64px;
+}
+
+.lost-page h1,
+.lost-page h2,
+.lost-page h3,
+.lost-page p,
+.lost-page form {
+    margin: 0;
+}
+
+.lost-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 12px 0 24px;
+}
+
+.lost-eyebrow {
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.lost-heading h1 {
+    margin: 5px 0 8px;
+    font: 500 clamp(32px, 4.6vw, 60px)/1.08 Georgia, "Times New Roman", serif;
+    letter-spacing: -0.035em;
+}
+
+.lost-muted {
+    color: var(--muted);
+}
+
+.lost-filter-panel {
+    margin-top: 16px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.lost-filters {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.lost-filters label {
+    flex: 1 1 160px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.lost-filters .lost-search {
+    flex: 2 1 260px;
+}
+
+.lost-filters input,
+.lost-filters select {
+    margin-top: 6px;
+}
+
+.lost-reset {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 12px;
+    color: var(--primary);
+}
+
+.lost-section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin: 30px 0 14px;
+}
+
+.lost-section-title h2 {
+    font: 500 30px/1.15 Georgia, "Times New Roman", serif;
+    letter-spacing: -0.035em;
+}
+
+.lost-card {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 20px 24px;
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+}
+
+.lost-photo {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.lost-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.lost-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-bottom: 8px;
+}
+
+.lost-badge {
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.lost-badge.missing {
+    background: #fbebc9;
+    color: #784312;
+}
+
+.lost-badge.found {
+    background: var(--success-background);
+    color: var(--primary);
+}
+
+.lost-location {
+    padding: 2px 9px;
+    border-radius: 4px;
+    background: var(--success-background);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.lost-time {
+    font-size: 13px;
+}
+
+.lost-body h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.lost-desc {
+    font-size: 15px;
+    margin-bottom: 6px !important;
+}
+
+.lost-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lost-secondary {
+    background: transparent;
+    border-color: #aabbb0;
+    color: var(--primary);
+}
+
+.lost-secondary:hover {
+    background: var(--success-background);
+}
+
+.lost-success {
+    background: var(--success-background);
+    border-color: #86ae8e;
+    color: var(--primary);
+}
+
+.lost-success:hover {
+    background: #d5e6d7;
+}
+
+.lost-danger {
+    background: white;
+    border-color: #d8bcb5;
+    color: var(--error-text);
+}
+
+.lost-danger:hover {
+    background: var(--error-background);
+}
+
+.lost-empty {
+    padding: 42px 20px;
+    text-align: center;
+}
+
+.lost-empty p {
+    margin: 10px 0 20px;
+}
+
+.lost-form-panel {
+    max-width: 720px;
+}
+
+.lost-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 760px) {
+    .lost-card {
+        flex-wrap: wrap;
+    }
+
+    .lost-actions {
+        width: 100%;
+    }
+}
