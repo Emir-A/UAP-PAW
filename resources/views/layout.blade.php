@@ -55,7 +55,6 @@
                 @endguest
 
                 @auth
-<<<<<<< HEAD
                 <a
                     href="{{ route('timetable.index') }}"
                     @if(request()->routeIs('timetable.*'))
@@ -64,10 +63,16 @@
                     >
                     Jadwal pribadi
                 </a>
-=======
-                <a href="{{ route('timetable.index') }}">Jadwal pribadi</a>
-                <a href="{{ route('reports.index') }}">Laporan</a>
->>>>>>> origin/main
+
+                <a
+                    href="{{ route('reports.index') }}"
+                    @if(request()->routeIs('reports.*'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Laporan
+                </a>
+
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
