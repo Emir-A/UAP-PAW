@@ -23,20 +23,15 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $path = database_path('timetable.json');
-        if (! file_exists($path)) {
-            return;
-        }
-
         $data = json_decode(
-            file_get_contents($path),
+            file_get_contents(database_path('timetable.json')),
             true,
             512,
             JSON_THROW_ON_ERROR
         );
 
         DB::transaction(function () use ($data) {
-            foreach ($data['rooms'] ?? [] as $room) {
+            foreach ($data['rooms'] as $room) {
                 DB::table('rooms')->insertOrIgnore(
                     collect($room)->only(['code', 'building', 'floor', 'capacity'])->all()
                 );
@@ -46,14 +41,10 @@ class DatabaseSeeder extends Seeder
             DB::table('course_sessions')->whereIn('room', $oldCodes)->update(['room' => 'F3.10']);
             DB::table('rooms')->whereIn('code', $oldCodes)->delete();
 
-            foreach ($data['sessions'] ?? [] as $row) {
-                $roomCode = in_array($row['room'], $oldCodes, true)
-                    ? 'F3.10'
-                    : $row['room'];
-
+            foreach ($data['sessions'] as $row) {
                 DB::table('course_sessions')->insertOrIgnore([
                     'id' => $row['id'],
-                    'room' => $roomCode,
+                    'room' => $row['room'],
                     'weekday' => $row['weekday'],
                     'title' => $row['title'],
                     'start_time' => $row['startTime'],

@@ -1,721 +1,1121 @@
+/* ==========================================================================
+   360° Virtual Tour & Spatial Floor Map Stylesheet - UAP-PAW
+   ========================================================================== */
 
-.fmap-wrapper {
+.vt360-shell {
     display: grid;
-    gap: 20px;
+    gap: 16px;
 }
 
-.fmap-eyebrow {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--primary);
-    margin-bottom: 4px;
-}
-
-/* Filter Panel */
-.fmap-filter-panel {
-    display: grid;
-    gap: 14px;
-}
-
-.fmap-filter-form {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(150px, 1fr)) auto;
-    gap: 14px;
-    align-items: end;
-}
-
-.fmap-field label {
-    font-size: 13px;
-    margin-bottom: 5px;
-    color: var(--text);
-}
-
-.fmap-filter-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.fmap-btn-outline {
-    background: transparent;
-    color: var(--primary);
-    border-color: var(--border);
-}
-
-.fmap-btn-outline:hover {
-    background: var(--success-background);
-    color: var(--primary-hover);
-}
-
-.fmap-btn-small {
-    min-height: 36px;
-    padding: 6px 12px;
-    font-size: 13px;
-}
-
-/* Quick Time Slots */
-.fmap-quick-slots {
+/* Time Filter Bar above 360 Stage */
+.vt360-timebar {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--border);
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
 }
 
-.fmap-quick-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-right: 4px;
-}
-
-.fmap-slot-pill {
+.vt360-timebar-group {
     display: inline-flex;
     align-items: center;
-    padding: 4px 11px;
-    border-radius: 999px;
+    gap: 8px;
+}
+
+.vt360-timebar-group label {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.vt360-timebar-group select,
+.vt360-timebar-group input {
+    width: auto;
+    min-height: 38px;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.vt360-btn-apply {
+    min-height: 38px;
+    padding: 6px 14px;
+    font-size: 13px;
+}
+
+.vt360-presets {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.vt360-preset-pill {
+    padding: 4px 10px;
+    border-radius: 99px;
     border: 1px solid var(--border);
     background: var(--background);
     color: var(--text);
-    font-size: 13px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 700;
     text-decoration: none;
-    transition: all 0.15s ease;
 }
 
-.fmap-slot-pill:hover,
-.fmap-slot-pill.is-active {
+.vt360-preset-pill:hover,
+.vt360-preset-pill.is-active {
     background: var(--primary);
     border-color: var(--primary);
     color: #ffffff;
 }
 
-/* Floor Switcher Tabs */
-.fmap-floor-tabs {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(140px, 1fr));
-    gap: 12px;
-}
+/* ==========================================================================
+   MAIN 360° STAGE VIEWPORT
+   ========================================================================== */
+.vt360-stage {
+    --vt-wall: #e8efe9;
+    --vt-floor: #cbd8ce;
+    --vt-accent: #194e40;
 
-.fmap-floor-tab {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 14px 16px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    text-decoration: none;
-    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.fmap-floor-tab:hover {
-    border-color: var(--primary);
-    background: #fbfcfa;
-    transform: translateY(-1px);
-}
-
-.fmap-floor-tab.is-active {
-    border: 2px solid var(--primary);
-    background: var(--success-background);
-    box-shadow: 0 4px 12px rgba(25, 78, 64, 0.08);
-}
-
-.fmap-tab-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 6px;
-}
-
-.fmap-tab-badge {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 7px;
-    border-radius: 4px;
-    background: rgba(25, 78, 64, 0.1);
-    color: var(--primary);
-}
-
-.fmap-tab-count {
-    font-size: 12px;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-}
-
-.fmap-tab-title {
-    font-size: 18px;
-    color: var(--text);
-}
-
-.fmap-tab-meter {
-    height: 5px;
-    border-radius: 99px;
-    background: #dfe7e0;
-    overflow: hidden;
-}
-
-.fmap-tab-meter-fill {
-    display: block;
-    height: 100%;
-    background: var(--primary);
-    border-radius: 99px;
-}
-
-/* Stats Summary Bar */
-.fmap-stats-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 18px 22px;
-    border-radius: var(--radius);
-    background: var(--surface);
-    border: 1px solid var(--border);
-}
-
-.fmap-stat-info h2 {
-    margin: 2px 0 4px;
-    font-size: 24px;
-}
-
-.fmap-stat-info p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.fmap-stat-cards {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.fmap-stat-card {
-    min-width: 115px;
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--background);
-    text-align: center;
-}
-
-.fmap-stat-card.is-free {
-    background: var(--success-background);
-    border-color: #a9c6b0;
-    color: var(--primary);
-}
-
-.fmap-stat-card.is-busy {
-    background: #fef3df;
-    border-color: #ebd0a2;
-    color: #7c4310;
-}
-
-.fmap-stat-num {
-    display: block;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.15;
-    font-variant-numeric: tabular-nums;
-}
-
-.fmap-stat-label {
-    font-size: 12px;
-    font-weight: 600;
-}
-
-/* Main Grid: Visual Floor Plan + Room Inspector */
-.fmap-main-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.85fr) minmax(300px, 1fr);
-    gap: 20px;
-    align-items: start;
-}
-
-/* Blueprint Panel */
-.fmap-blueprint-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.fmap-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.fmap-legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.fmap-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    display: inline-block;
-}
-
-.fmap-dot.is-free {
-    background: #227858;
-}
-
-.fmap-dot.is-busy {
-    background: #d97724;
-}
-
-.fmap-dot.is-tour {
-    background: #2567a4;
-    border-radius: 50%;
-}
-
-.fmap-compass {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: var(--background);
-    border: 1px solid var(--border);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--primary);
-}
-
-/* Architectural Blueprint Canvas */
-.fmap-blueprint-canvas {
-    padding: 20px;
-    border-radius: 12px;
-    border: 2px solid #b8c9bc;
-    background-color: #f3f7f4;
-    background-image:
-        linear-gradient(to right, rgba(25, 78, 64, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(25, 78, 64, 0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-    display: grid;
-    gap: 14px;
-}
-
-.fmap-wing-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    padding-inline: 4px;
-}
-
-.fmap-wing-grid {
-    display: grid;
-    grid-template-columns: repeat(var(--wing-cols, 4), minmax(110px, 1fr));
-    gap: 12px;
-}
-
-/* Room Interactive Box on Blueprint */
-.fmap-room-node {
     position: relative;
+    width: 100%;
+    height: clamp(560px, 75vh, 760px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #26483e;
+    background: #10211c;
+    box-shadow: 0 16px 36px rgba(15, 34, 28, 0.22);
+    user-select: none;
+}
+
+.vt360-stage:fullscreen {
+    height: 100vh;
+    border-radius: 0;
+}
+
+/* 360 Interactive Drag Canvas */
+.vt360-viewport {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    cursor: grab;
+    outline: none;
+}
+
+.vt360-viewport:active {
+    cursor: grabbing;
+}
+
+.vt360-world {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ceiling & Perspective Floor */
+.vt360-ceiling {
+    position: absolute;
+    inset: 0 0 65% 0;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92), rgba(210, 224, 215, 0.85) 75%),
+        repeating-linear-gradient(90deg, transparent 0 180px, rgba(25, 78, 64, 0.08) 180px 182px);
+    border-bottom: 3px solid rgba(25, 78, 64, 0.25);
+    z-index: 1;
+}
+
+.vt360-floor {
+    position: absolute;
+    inset: 68% 0 0 0;
+    background-color: var(--vt-floor);
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.16), transparent 35%),
+        repeating-linear-gradient(90deg, rgba(25, 78, 64, 0.12) 0 2px, transparent 2px 110px),
+        repeating-linear-gradient(0deg, rgba(25, 78, 64, 0.12) 0 2px, transparent 2px 36px);
+    border-top: 4px solid #7d9686;
+    z-index: 1;
+}
+
+/* 360 Panorama Strip (4200px wide) */
+.vt360-panorama-strip {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 4200px;
+    height: 76%;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, var(--vt-wall) 45%, #d6e2d9 100%);
+    background-image:
+        repeating-linear-gradient(90deg, rgba(25, 78, 64, 0.06) 0 1px, transparent 1px 140px);
+    z-index: 2;
+    will-change: transform;
+}
+
+.vt360-wall-compass {
+    position: absolute;
+    top: 24px;
+    transform: translateX(-50%);
+    padding: 4px 14px;
+    border-radius: 99px;
+    background: rgba(16, 35, 29, 0.72);
+    color: #d9f2e3;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   3D CLASSROOM DOOR UNITS & HOTSPOTS IN 360° CORRIDOR
+   ========================================================================== */
+.vt360-door-unit {
+    position: absolute;
+    bottom: 24px;
+    transform: translateX(-50%);
+    width: 175px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    text-align: left;
-    min-height: 108px;
-    padding: 12px;
-    border-radius: 9px;
-    border: 2px solid #96bca3;
-    background: #ffffff;
-    color: var(--text);
-    cursor: pointer;
-    transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease, opacity 0.15s ease;
+    align-items: center;
+    transition: opacity 0.25s ease, filter 0.25s ease;
 }
 
-.fmap-room-node.is-free {
-    background: #eef8f0;
-    border-color: #5ca376;
+.vt360-door-unit.is-dimmed {
+    opacity: 0.25;
+    filter: grayscale(80%);
 }
 
-.fmap-room-node.is-busy {
-    background: #fff6ea;
-    border-color: #e09b56;
-}
-
-.fmap-room-node.is-dimmed {
-    opacity: 0.35;
-    filter: grayscale(40%);
-}
-
-.fmap-room-node:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 14px rgba(24, 45, 40, 0.12);
-}
-
-.fmap-room-node.is-selected {
-    outline: 3px solid var(--focus);
-    outline-offset: 2px;
-    box-shadow: 0 6px 16px rgba(37, 103, 164, 0.22);
-}
-
-.fmap-node-top {
+/* Hanging LED Room Sign above Door */
+.vt360-door-sign {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 4px;
-}
-
-.fmap-node-code {
-    font-size: 18px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--text);
-}
-
-.fmap-tour-badge {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 1px 5px;
-    border-radius: 4px;
-    background: #2567a4;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    border-radius: 7px;
+    background: #142a23;
     color: #ffffff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+    border-left: 5px solid #28a76b;
 }
 
-.fmap-node-status {
-    display: inline-block;
-    margin: 6px 0 4px;
-    padding: 2px 8px;
+.vt360-door-unit.is-busy .vt360-door-sign {
+    border-left-color: #ea7325;
+}
+
+.vt360-sign-code {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.vt360-sign-led {
+    padding: 2px 7px;
     border-radius: 99px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.fmap-room-node.is-free .fmap-node-status {
-    background: #227858;
+    font-size: 10px;
+    font-weight: 800;
+    background: #1e8f5a;
     color: #ffffff;
 }
 
-.fmap-room-node.is-busy .fmap-node-status {
-    background: #c76216;
-    color: #ffffff;
+.vt360-door-unit.is-busy .vt360-sign-led {
+    background: #d85c17;
 }
 
-.fmap-node-meta {
+/* Architectural Door Frame */
+.vt360-door-frame {
+    position: relative;
+    width: 158px;
+    height: 245px;
+    padding: 12px;
+    border-radius: 8px 8px 0 0;
+    border: 5px solid #35584b;
+    border-bottom: 0;
+    background: linear-gradient(180deg, #547d6d 0%, #3d6254 100%);
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.vt360-door-unit.is-free .vt360-door-frame {
+    border-color: #1f6b4a;
+    background: linear-gradient(180deg, #2e7d5b 0%, #205940 100%);
+}
+
+.vt360-door-unit.is-busy .vt360-door-frame {
+    border-color: #8a4319;
+    background: linear-gradient(180deg, #9e5324 0%, #703917 100%);
+}
+
+/* Door Glass Window showing interior classroom board */
+.vt360-door-glass {
+    width: 100%;
+    height: 125px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    background: rgba(245, 252, 248, 0.92);
+    color: #152b24;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.vt360-glass-board {
+    display: grid;
+    gap: 4px;
     font-size: 11px;
-    line-height: 1.35;
-    color: var(--muted);
+    line-height: 1.3;
+}
+
+.vt360-glass-board strong {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: #122922;
 }
 
-/* Architectural Door Indicator on Corridor Side */
-.fmap-door-marker {
+.vt360-glass-board small {
+    color: #496359;
+    font-size: 10px;
+}
+
+.vt360-door-handle {
     position: absolute;
-    left: 18px;
-    width: 22px;
-    height: 5px;
-    background: var(--primary);
+    right: 12px;
+    top: 56%;
+    width: 14px;
+    height: 6px;
     border-radius: 3px;
-    opacity: 0.45;
+    background: #e3ece6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.fmap-door-marker.is-bottom {
-    bottom: -3px;
+/* 3D Hotspots inside Panorama */
+.vt360-hotspot {
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
 }
 
-.fmap-door-marker.is-top {
-    top: -3px;
+.vt360-hide-hotspots .vt360-hotspot {
+    opacity: 0;
+    pointer-events: none;
 }
 
-/* Central Corridor Strip */
-.fmap-corridor {
-    margin-block: 4px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px dashed #93aa9b;
-    background: rgba(255, 255, 255, 0.78);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.fmap-corridor-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--primary);
-}
-
-.fmap-facilities {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.fmap-facility-chip {
+.vt360-hs-door {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 3px 9px;
-    border-radius: 5px;
-    background: #e4ede6;
-    color: var(--text);
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.fmap-blueprint-hint {
-    margin: 14px 0 0;
-    font-size: 13px;
-    color: var(--muted);
-}
-
-/* Room Inspector Aside Panel */
-.fmap-inspector-panel {
-    position: sticky;
-    top: 20px;
-}
-
-.fmap-inspector-card {
-    display: none;
-}
-
-.fmap-inspector-card.is-active {
-    display: grid;
-    gap: 16px;
-}
-
-.fmap-inspector-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-}
-
-.fmap-inspector-title {
-    margin: 2px 0 0;
-    font-size: 26px;
-}
-
-.fmap-status-pill {
-    padding: 5px 11px;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 36px;
+    padding: 6px 10px;
     border-radius: 99px;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.fmap-status-pill.is-free {
-    background: var(--success-background);
-    color: var(--primary);
-}
-
-.fmap-status-pill.is-busy {
-    background: #fbebc9;
-    color: #784312;
-}
-
-.fmap-availability-box {
-    padding: 12px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.fmap-availability-box.is-free {
-    background: #eef8f0;
-    border-left: 4px solid #227858;
-}
-
-.fmap-availability-box.is-busy {
-    background: #fff6ea;
-    border-left: 4px solid #d97724;
-}
-
-.fmap-availability-box p {
-    margin: 4px 0 0;
-    color: var(--muted);
-}
-
-.fmap-session-highlight,
-.fmap-session-next {
-    padding: 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--background);
-}
-
-.fmap-box-label {
-    display: block;
+    border: 2px solid #ffffff;
+    background: rgba(16, 38, 31, 0.88);
+    color: #ffffff;
     font-size: 11px;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--primary);
-    margin-bottom: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
-.fmap-session-highlight h4,
-.fmap-session-next h4 {
-    margin: 0 0 4px;
-    font-size: 16px;
+.vt360-hs-door:hover {
+    transform: scale(1.05);
+    background: #ffffff;
+    color: #13382d;
 }
 
-.fmap-session-meta {
-    margin: 0;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
+.vt360-hs-info {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    background: #2567a4;
+    color: #ffffff;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 800;
+    font-style: italic;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 
-.fmap-session-sub {
-    margin: 6px 0 0;
-    font-size: 13px;
-    color: var(--muted);
+.vt360-hs-info:hover {
+    transform: scale(1.14);
+    background: #1b4f80;
 }
 
-.fmap-add-form {
-    margin-top: 12px;
+.vt360-hs-chevron {
+    position: absolute;
+    bottom: -18px;
+    transform: translateX(-50%);
+    width: 46px;
+    height: 46px;
+    min-height: 46px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    background: rgba(25, 78, 64, 0.82);
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 900;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
-/* Virtual Tour Reference Box */
-.fmap-tour-box {
-    padding: 12px 14px;
-    border-radius: 8px;
-    border: 1px dashed #8eb2d5;
-    background: #f2f7fc;
-    display: grid;
-    gap: 10px;
-    font-size: 13px;
+.vt360-hs-chevron:hover {
+    transform: translateX(-50%) scale(1.12);
+    background: #227858;
 }
 
-.fmap-tour-box p {
-    margin: 4px 0 0;
-    color: var(--muted);
-}
-
-/* Daily Schedule Timeline */
-.fmap-timeline-head {
+/* ==========================================================================
+   360° ROOM INTERIOR MODE ELEMENTS
+   ========================================================================== */
+.vt360-interior-front,
+.vt360-interior-side,
+.vt360-interior-exit {
+    position: absolute;
+    bottom: 30px;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 14px;
+}
+
+.vt360-projector-screen {
+    width: 440px;
+    padding: 26px 28px;
+    border-radius: 12px;
+    border: 6px solid #2b3d36;
+    background: #ffffff;
+    color: #162b25;
+    text-align: center;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+}
+
+.vt360-projector-screen.is-free {
+    border-color: #1f7a53;
+    background: linear-gradient(180deg, #f2fbf5 0%, #ffffff 100%);
+}
+
+.vt360-projector-screen.is-busy {
+    border-color: #c95d18;
+    background: linear-gradient(180deg, #fff6ee 0%, #ffffff 100%);
+}
+
+.vt360-screen-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: #194e40;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     margin-bottom: 10px;
 }
 
-.fmap-timeline-head h4 {
+.vt360-projector-screen h3 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.vt360-projector-screen p {
+    margin: 0 0 6px;
+    font-weight: 700;
+    color: #264a3e;
+}
+
+.vt360-lecturer-desk {
+    width: 300px;
+    padding: 12px;
+    border-radius: 8px 8px 0 0;
+    background: #5b432d;
+    color: #f4eadf;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.vt360-window-frame,
+.vt360-exit-door {
+    width: 280px;
+    padding: 22px;
+    border-radius: 12px;
+    background: rgba(18, 39, 33, 0.86);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    text-align: center;
+    display: grid;
+    gap: 10px;
+}
+
+/* ==========================================================================
+   HUD OVERLAYS (BRANDING, RADAR MINI-MAP, LOCATION TITLE, TOOLBAR)
+   ========================================================================== */
+.vt360-hud-brand {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: rgba(14, 31, 26, 0.82);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: none;
+}
+
+.vt360-brand-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #227858;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.vt360-brand-faculty {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.vt360-brand-sub {
+    font-size: 11px;
+    color: #b7d8c6;
+}
+
+/* Top-Right Radar & Mini-Map */
+.vt360-hud-radar {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 10;
+    width: 255px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(14, 31, 26, 0.86);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    display: grid;
+    gap: 8px;
+}
+
+.vt360-radar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.vt360-compass-deg {
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #9ef0c0;
+    font-variant-numeric: tabular-nums;
+}
+
+.vt360-minimap {
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    display: grid;
+    gap: 6px;
+}
+
+.vt360-minimap-wing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+}
+
+.vt360-mmdot {
+    min-width: 24px;
+    min-height: 22px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.vt360-mmdot.is-free {
+    background: #1f8a5b;
+}
+
+.vt360-mmdot.is-busy {
+    background: #d9641e;
+}
+
+.vt360-minimap-corridor {
+    position: relative;
+    height: 24px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    display: grid;
+    place-items: center;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: #b7d8c6;
+    overflow: hidden;
+}
+
+.vt360-fov-cone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 18px solid rgba(110, 242, 174, 0.65);
+    transform-origin: 50% 65%;
+    pointer-events: none;
+}
+
+.vt360-radar-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #d2e8dc;
+}
+
+.vt360-radar-legend i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.vt360-radar-legend .dot-free {
+    background: #25a86e;
+}
+
+.vt360-radar-legend .dot-busy {
+    background: #e66c22;
+}
+
+/* Bottom-Left Scene Title Overlay */
+.vt360-hud-location {
+    position: absolute;
+    bottom: 22px;
+    left: 22px;
+    z-index: 10;
+    max-width: 340px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(14, 31, 26, 0.82);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: none;
+}
+
+.vt360-mode-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #227858;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+}
+
+.vt360-hud-location h2 {
     margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.vt360-hud-location p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #bfd9ca;
+}
+
+/* Bottom-Center Floating Control Dock */
+.vt360-control-dock {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 12;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(14, 31, 26, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+
+.vt360-dock-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-width: 68px;
+    min-height: 52px;
+    padding: 6px 10px;
+    border-radius: 99px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #d7ebe0;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.vt360-dock-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.vt360-dock-btn.is-active {
+    background: #227858;
+    border-color: #6bdba8;
+    color: #ffffff;
+}
+
+/* Floor Carousel Drawer above Control Dock */
+.vt360-carousel-drawer {
+    position: absolute;
+    bottom: 92px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+    width: min(760px, calc(100% - 36px));
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(14, 31, 26, 0.92);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.vt360-carousel-drawer.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 14px);
+}
+
+.vt360-drawer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #bfd9ca;
+}
+
+.vt360-floor-cards {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(115px, 1fr));
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.vt360-floor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    text-align: left;
+    cursor: pointer;
+}
+
+.vt360-floor-card:hover,
+.vt360-floor-card.is-active {
+    background: #227858;
+    border-color: #84f0be;
+}
+
+.vt360-fcard-tag {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #a9e8c8;
+}
+
+.vt360-floor-card strong {
     font-size: 15px;
 }
 
-.fmap-timeline-head span {
-    font-size: 13px;
-    color: var(--muted);
+.vt360-floor-card small {
+    font-size: 11px;
+    color: #d7eee2;
 }
 
-.fmap-empty-schedule {
-    padding: 14px;
-    border-radius: 8px;
+/* Info Drawer (Pop-up Hotspot `i`) */
+.vt360-info-drawer {
+    position: absolute;
+    top: 18px;
+    bottom: 92px;
+    right: 18px;
+    z-index: 15;
+    width: min(350px, calc(100% - 36px));
+    padding: 18px;
+    border-radius: 14px;
+    background: #ffffff;
+    color: var(--text);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.vt360-info-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.vt360-info-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.vt360-info-head h3 {
+    margin: 2px 0 0;
+    font-size: 24px;
+}
+
+.vt360-info-close,
+.vt360-modal-close {
+    width: 34px;
+    height: 34px;
+    min-height: 34px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--border);
     background: var(--background);
-    color: var(--muted);
-    font-size: 13px;
-    text-align: center;
+    color: var(--text);
+    cursor: pointer;
 }
 
-.fmap-timeline-list {
+.vt360-info-status {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.vt360-info-status.is-free {
+    background: #e9f7ef;
+    border-left: 4px solid #1f8a5b;
+}
+
+.vt360-info-status.is-busy {
+    background: #fff4ec;
+    border-left: 4px solid #d9641e;
+}
+
+.vt360-info-status p {
+    margin: 4px 0 0;
+    color: var(--muted);
+}
+
+.vt360-info-actions {
+    display: grid;
+    gap: 8px;
+}
+
+.vt360-btn-enter {
+    width: 100%;
+    min-height: 40px;
+    font-size: 13px;
+}
+
+.vt360-btn-outline {
+    width: 100%;
+    min-height: 38px;
+    background: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+    font-size: 12px;
+}
+
+.vt360-info-schedule h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.vt360-session-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     gap: 8px;
-    max-height: 320px;
-    overflow-y: auto;
 }
 
-.fmap-timeline-item {
-    display: grid;
-    grid-template-columns: 58px minmax(0, 1fr);
-    gap: 12px;
-    padding: 10px 12px;
+.vt360-session-item {
+    padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid var(--border);
-    background: #ffffff;
+    background: var(--background);
+    font-size: 12px;
+}
+
+.vt360-session-item.is-current {
+    border-color: #d9641e;
+    background: #fff6ee;
+}
+
+.vt360-stime {
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.vt360-sbody {
+    display: grid;
+    gap: 2px;
+    margin-top: 2px;
+}
+
+/* All Locations Grid Modal Overlay */
+.vt360-modal-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: rgba(11, 24, 20, 0.92);
+    backdrop-filter: blur(10px);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vt360-modal-overlay[hidden],
+.vt360-info-drawer[hidden] {
+    display: none !important;
+}
+
+.vt360-modal-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #ffffff;
+}
+
+.vt360-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vt360-modal-header h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.vt360-modal-header p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #bfd9ca;
+}
+
+.vt360-modal-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.vt360-modal-filters input {
+    flex: 1 1 240px;
+    min-height: 38px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.vt360-filter-chip {
+    min-height: 38px;
+    padding: 6px 14px;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.vt360-filter-chip.is-active {
+    background: #227858;
+    border-color: #79eeb7;
+}
+
+.vt360-modal-grid {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
+    padding-right: 6px;
+}
+
+.vt360-loc-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.14s ease, background 0.14s ease;
+}
+
+.vt360-loc-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.vt360-loc-card.is-free {
+    border-left: 5px solid #25a86e;
+}
+
+.vt360-loc-card.is-busy {
+    border-left: 5px solid #e66c22;
+}
+
+.vt360-loc-preview {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.vt360-loc-floor {
+    font-size: 10px;
+    color: #b7d8c6;
+}
+
+.vt360-loc-code {
+    font-size: 18px;
+}
+
+.vt360-loc-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 99px;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.vt360-loc-meta strong {
+    display: block;
+    font-size: 12px;
+}
+
+.vt360-loc-meta small {
+    font-size: 11px;
+    color: #bfd9ca;
+}
+
+/* Quick Teleport Strip below 360 Stage */
+.vt360-quick-strip {
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    display: grid;
+    gap: 10px;
+}
+
+.vt360-quick-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
     font-size: 13px;
 }
 
-.fmap-timeline-item.is-current {
-    border-color: #d97724;
-    background: #fff9f0;
-}
-
-.fmap-timeline-time {
-    display: grid;
-    align-content: start;
-    padding-right: 8px;
-    border-right: 2px solid var(--primary);
-    font-variant-numeric: tabular-nums;
-}
-
-.fmap-timeline-time span {
-    font-size: 12px;
+.vt360-quick-head span {
     color: var(--muted);
 }
 
-.fmap-timeline-body {
-    display: grid;
-    gap: 2px;
+.vt360-quick-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.fmap-timeline-body span,
-.fmap-timeline-body small {
-    color: var(--muted);
+.vt360-qpill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 4px 10px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--background);
+    color: var(--text);
     font-size: 12px;
+    cursor: pointer;
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 1024px) {
-    .fmap-main-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .fmap-inspector-panel {
-        position: static;
-    }
-
-    .fmap-floor-tabs {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+.vt360-qpill.is-free {
+    border-color: #6ab587;
+    background: #eef8f1;
+    color: #164936;
 }
 
-@media (max-width: 760px) {
-    .fmap-filter-form {
-        grid-template-columns: 1fr;
+.vt360-qpill.is-busy {
+    border-color: #e09c6c;
+    background: #fff5ec;
+    color: #7d3c11;
+}
+
+@media (max-width: 820px) {
+    .vt360-hud-radar {
+        display: none;
     }
 
-    .fmap-wing-grid {
-        grid-template-columns: repeat(2, minmax(110px, 1fr));
+    .vt360-floor-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vt360-hud-location {
+        bottom: 88px;
     }
 }
