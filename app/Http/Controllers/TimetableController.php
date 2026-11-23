@@ -27,10 +27,7 @@ class TimetableController extends Controller
 
     public function create()
     {
-        return view('timetable.form', [
-            'entry' => null,
-            'classes' => $this->classes(),
-        ]);
+        return redirect()->route('classes');
     }
 
     public function store(Request $request)

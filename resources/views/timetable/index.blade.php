@@ -28,7 +28,7 @@ $days = [
             </p>
         </div>
 
-        <a class="button" href="{{ route('timetable.create') }}">
+        <a class="button" href="{{ route('classes') }}">
             + Tambah kelas
         </a>
     </div>
@@ -105,7 +105,7 @@ $days = [
 
         <p>Tambahkan kelas anda di semester ini.</p>
 
-        <a class="button" href="{{ route('timetable.create') }}">
+        <a class="button" href="{{ route('classes') }}">
             Buka jadwal kelas →
         </a>
     </div>
