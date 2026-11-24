@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\LostItemController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomReportController;
 use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Route;
@@ -89,4 +90,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reports/{id}', [RoomReportController::class, 'destroy'])
         ->whereNumber('id')
         ->name('reports.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'show'])
+        ->name('profile.show');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
 });

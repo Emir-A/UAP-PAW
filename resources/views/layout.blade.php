@@ -73,6 +73,15 @@
                     Laporan
                 </a>
 
+                <a
+                    href="{{ route('profile.show') }}"
+                    @if(request()->routeIs('profile.*'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Profil
+                </a>
+
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
