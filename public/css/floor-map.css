@@ -1,0 +1,71 @@
+/* 360 Live Embedded Iframe (FILKOM UB Virtual Tour) */
+.vt360-live-frame-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: #0d1d18;
+}
+
+.vt360-live-frame-wrap.is-hidden,
+.vt360-viewport.is-hidden,
+.vt360-scene-strip.is-hidden {
+    display: none !important;
+}
+
+.vt360-live-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.vt360-scene-strip {
+    position: absolute;
+    top: 78px;
+    left: 18px;
+    right: 285px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: rgba(14, 31, 26, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    overflow-x: auto;
+}
+
+.vt360-scene-strip-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: #9ef0c0;
+    white-space: nowrap;
+}
+
+.vt360-scene-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vt360-scene-pill {
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2f2ea;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.vt360-scene-pill:hover,
+.vt360-scene-pill.is-active {
+    background: #227858;
+    border-color: #79eeb7;
+    color: #ffffff;
+}
