@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\LostItemController;
@@ -89,4 +90,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reports/{id}', [RoomReportController::class, 'destroy'])
         ->whereNumber('id')
         ->name('reports.destroy');
+
+    Route::get('/assignments', [AssignmentController::class, 'index'])
+        ->name('assignments.index');
+
+    Route::get('/assignments/create', [AssignmentController::class, 'create'])
+        ->name('assignments.create');
+
+    Route::post('/assignments', [AssignmentController::class, 'store'])
+        ->name('assignments.store');
+
+    Route::get('/assignments/{id}/edit', [AssignmentController::class, 'edit'])
+        ->whereNumber('id')
+        ->name('assignments.edit');
+
+    Route::put('/assignments/{id}', [AssignmentController::class, 'update'])
+        ->whereNumber('id')
+        ->name('assignments.update');
+
+    Route::patch('/assignments/{id}/status', [AssignmentController::class, 'updateStatus'])
+        ->whereNumber('id')
+        ->name('assignments.status');
+
+    Route::delete('/assignments/{id}', [AssignmentController::class, 'destroy'])
+        ->whereNumber('id')
+        ->name('assignments.destroy');
 });

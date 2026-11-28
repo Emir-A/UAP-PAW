@@ -65,6 +65,15 @@
                 </a>
 
                 <a
+                    href="{{ route('assignments.index') }}"
+                    @if(request()->routeIs('assignments.*'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Tugas kuliah
+                </a>
+
+                <a
                     href="{{ route('reports.index') }}"
                     @if(request()->routeIs('reports.*'))
                     aria-current="page"

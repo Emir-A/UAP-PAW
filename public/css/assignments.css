@@ -1,0 +1,274 @@
+.main-content:has(.task-page) > .page-heading {
+    display: none;
+}
+
+.main-content {
+    width: min(1300px, 100%);
+    padding: clamp(20px, 3vw, 44px) clamp(16px, 4vw, 64px) 64px;
+}
+
+.task-page h1,
+.task-page h2,
+.task-page h3,
+.task-page p,
+.task-page form {
+    margin: 0;
+}
+
+.task-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 12px 0 24px;
+}
+
+.task-eyebrow {
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.task-heading h1 {
+    margin: 5px 0 8px;
+    font: 500 clamp(32px, 4.6vw, 60px)/1.08 Georgia, "Times New Roman", serif;
+    letter-spacing: -0.035em;
+}
+
+.task-muted {
+    color: var(--muted);
+}
+
+.task-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.task-stat {
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+}
+
+.task-stat-label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.task-stat strong {
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--primary);
+}
+
+.task-filter-panel {
+    margin-top: 16px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.task-filters {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.task-filters label {
+    flex: 1 1 180px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.task-filters .task-search {
+    flex: 2 1 260px;
+}
+
+.task-filters input,
+.task-filters select {
+    margin-top: 6px;
+}
+
+.task-reset {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 12px;
+    color: var(--primary);
+}
+
+.task-section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0 14px;
+}
+
+.task-section-title h2 {
+    font: 500 30px/1.15 Georgia, "Times New Roman", serif;
+    letter-spacing: -0.035em;
+}
+
+.task-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+}
+
+.task-card.is-overdue {
+    border-color: #e2b8b0;
+}
+
+.task-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.task-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-bottom: 8px;
+}
+
+.task-badge {
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.task-badge.status-belum_dikerjakan {
+    background: #fbebc9;
+    color: #784312;
+}
+
+.task-badge.status-dikerjakan {
+    background: #e1eefb;
+    color: #1c4e80;
+}
+
+.task-badge.status-selesai {
+    background: var(--success-background);
+    color: var(--primary);
+}
+
+.task-course {
+    padding: 2px 9px;
+    border-radius: 4px;
+    background: var(--success-background);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.task-deadline {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.task-deadline.overdue {
+    color: var(--error-text);
+    font-weight: 600;
+}
+
+.task-body h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.task-desc {
+    font-size: 15px;
+    color: var(--muted);
+    white-space: pre-line;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.task-status-form select {
+    width: auto;
+    min-width: 158px;
+}
+
+.task-secondary {
+    background: transparent;
+    border-color: #aabbb0;
+    color: var(--primary);
+}
+
+.task-secondary:hover {
+    background: var(--success-background);
+}
+
+.task-danger {
+    background: white;
+    border-color: #d8bcb5;
+    color: var(--error-text);
+}
+
+.task-danger:hover {
+    background: var(--error-background);
+}
+
+.task-empty {
+    padding: 42px 20px;
+    text-align: center;
+}
+
+.task-empty p {
+    margin: 10px 0 20px;
+}
+
+.task-form-panel {
+    max-width: 720px;
+}
+
+.task-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (max-width: 760px) {
+    .task-card {
+        flex-wrap: wrap;
+    }
+
+    .task-actions {
+        width: 100%;
+    }
+}

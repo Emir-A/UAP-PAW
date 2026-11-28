@@ -56,4 +56,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(RoomReport::class);
     }
+
+    /**
+     * Tugas kuliah milik user
+     */
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }
