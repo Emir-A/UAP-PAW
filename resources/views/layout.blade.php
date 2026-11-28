@@ -42,6 +42,15 @@
                 </a>
 
                 <a
+                    href="{{ route('floor-map.index') }}"
+                    @if(request()->routeIs('floor-map.*'))
+                    aria-current="page"
+                    @endif
+                    >
+                    Map per lantai
+                </a>
+
+                <a
                     href="{{ route('lost-items.index') }}"
                     @if(request()->routeIs('lost-items.*'))
                     aria-current="page"
