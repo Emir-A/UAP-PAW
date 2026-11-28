@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\FloorMapController;
 use App\Http\Controllers\LostItemController;
 use App\Http\Controllers\RoomReportController;
 use App\Http\Controllers\TimetableController;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [CatalogController::class, 'index'])->name('home');
 Route::get('/classes', [CatalogController::class, 'index'])->name('classes');
 Route::get('/rooms', [CatalogController::class, 'rooms'])->name('rooms');
+Route::get('/map', [FloorMapController::class, 'index'])->name('floor-map.index');
 Route::get('/lost-items', [LostItemController::class, 'index'])->name('lost-items.index');
 
 Route::middleware('guest')->group(function () {
